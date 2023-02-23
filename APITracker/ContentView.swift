@@ -2,20 +2,23 @@
 //  ContentView.swift
 //  APITracker
 //
-//  Created by Arash Zeinoddini on 2/21/23.
+//  Created by Arash Zeinoddini on 2/20/23.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            LeftView()
+                .tabItem {
+                    Label("COVID19", systemImage: "allergens")
+                }
+            RightView()
+                .tabItem {
+                    Label("Countries", systemImage: "network")
+                }
         }
-        .padding()
     }
 }
 
