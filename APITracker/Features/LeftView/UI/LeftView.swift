@@ -12,15 +12,17 @@ struct LeftView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(covid19VM.covid19s) { covid in
-                    COVID19Row(covid19: covid)
+                ForEach(covid19VM.covid19s) { covid19 in
+                    NavigationLink(destination: Covid19DetailView(covid19: covid19)) {
+                        COVID19Row(covid19: covid19)
+                    }
                 }
-            }
-            .task {
-                await covid19VM.getLatestItems()
             }
             .navigationTitle("COVID19")
             .listStyle(PlainListStyle())
+        }
+        .task {
+            await covid19VM.getLatestItems()
         }
     }
 }

@@ -10,18 +10,22 @@ import SwiftUI
 
 struct RightView: View {
     @StateObject var countriesVM = CountriesViewModel()
+    @State private var isShowingSignupView = false
+
     var body: some View {
         NavigationView {
             List {
                 ForEach(countriesVM.countries) { country in
-                    CountryRow(country: country)
+                    NavigationLink(destination: CountryDetailsView(country: country)) {
+                        CountryRow(country: country)
+                    }
                 }
-            }
-            .task {
-                await countriesVM.getAll()
             }
             .navigationTitle("Countries")
             .listStyle(PlainListStyle())
+        }
+        .task {
+            await countriesVM.getAll()
         }
     }
 }
